@@ -47,30 +47,6 @@
         screencapture.location = "~/Pictures/screenshots";
       };
 
-      homebrew = {
-        enable = true;
-        enableRosetta = true;
-
-        user = "t.naumann"
-        onActivation.cleanup = "uninstall";
-        mutableTaps = false;
-
-        taps = [
-          "homebrew/homebrew-core" = inputs.homebrew-core;
-          "homebrew/homebrew-cask" = inputs.homebrew-cask;
-          "homebrew/homebrew-bundle" = inputs.homebrew-bundle;
-        ];
-
-        brews = [ 
-          "neofetch"
-        ];
-
-        casks = [
-
-        ];
-      };
-
-
       # allowUnfree is required to install some packages that are not "free" software.
       nixpkgs.config.allowUnfree = true;
 
@@ -104,7 +80,38 @@
     darwinConfigurations."simple" = nix-darwin.lib.darwinSystem {
       modules = [
         configuration
-       ];
+        nix-homebrew.darwinModules.nix-homebrew
+        {
+          nix-homebrew = {
+            # Install Homebrew under the default prefix
+            enable = true;
+
+            # Apple Silicon Only: Also install Homebrew under the default Intel prefix for Rosetta 2
+            enableRosetta = true;
+
+            # User owning the Homebrew prefix
+            user = "t.naumann";
+
+            # Optional: Declarative tap management
+            taps = {
+              "homebrew/homebrew-core" = homebrew-core;
+              "homebrew/homebrew-cask" = homebrew-cask;
+              "homebrew/homebrew-bundle" = homebrew-bundle;
+            };
+
+            brews = [ 
+              "neofetch"
+            ];
+        
+            casks = [
+
+            ];
+          
+            # With mutableTaps disabled, taps can no longer be added imperatively with `brew tap`.
+            mutableTaps = false;
+          };
+        }
+      ];
     };
 
     # Expose the package set, including overlays, for convenience.
