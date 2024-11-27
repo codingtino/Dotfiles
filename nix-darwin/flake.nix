@@ -34,6 +34,7 @@
       environment.systemPackages = with pkgs;
         [
           cmatrix
+          darwin.xcode
           git
         ];
       
