@@ -47,6 +47,21 @@
         screencapture.location = "~/Pictures/screenshots";
       };
 
+      homebrew = {
+        taps = [
+
+        ];
+
+        brews = [ 
+          "neofetch"
+        ];
+        
+        casks = [
+
+        ];
+      };
+
+
       # allowUnfree is required to install some packages that are not "free" software.
       nixpkgs.config.allowUnfree = true;
 
@@ -99,14 +114,8 @@
               "homebrew/homebrew-bundle" = homebrew-bundle;
             };
 
-            brews = [ 
-              "neofetch"
-            ];
-        
-            casks = [
-
-            ];
-          
+            # Optional: Enable fully-declarative tap management
+            #
             # With mutableTaps disabled, taps can no longer be added imperatively with `brew tap`.
             mutableTaps = false;
           };
