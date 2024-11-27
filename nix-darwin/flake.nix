@@ -34,20 +34,37 @@
       environment.systemPackages = with pkgs;
         [
           cmatrix
-          darwin.xcode
+          fastfetch
           git
         ];
-      
+
+      system.defaults = {
+        dock.autohide = true;
+        dock.mru-spaces = false;
+        finder.AppleShowAllExtensions = true;
+        finder.FXPreferredViewStyle = "Nlsv";
+        loginwindow.LoginwindowText = "TEST";
+        screencapture.location = "~/Pictures/screenshots";
+      };
+
       homebrew = {
         enable = true;
         onActivation.cleanup = "uninstall";
 
-        taps = [];
-        brews = [ 
-          "fastfetch"
+        taps = [
+
         ];
-        casks = [];
+        brews = [ 
+#          "fastfetch"
+        ];
+        casks = [
+
+        ];
       };
+
+
+      # allowUnfree is required to install some packages that are not "free" software.
+      nixpkgs.config.allowUnfree = true;
 
       # Auto upgrade nix package and the daemon service.
       services.nix-daemon.enable = true;
