@@ -5,10 +5,6 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager }:
@@ -43,12 +39,6 @@
       nixpkgs.hostPlatform = "aarch64-darwin";
 
       security.pam.enableSudoTouchIdAuth = true;
-      users.users."t.naumann".home = "/Users/t.naumann";
-      home-manager.backupFileExtension = "backup";
-      nix.configureBuildUsers = false;
-      nix.useDaemon = true;
-
-
     };
   in
   {
@@ -57,11 +47,6 @@
     darwinConfigurations."simple" = nix-darwin.lib.darwinSystem {
       modules = [
         configuration
-        home-manager.darwinModules.home-manager {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users."t.naumann" = import ./home.nix;
-        }
       ];
     };
 
