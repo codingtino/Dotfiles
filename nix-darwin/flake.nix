@@ -24,6 +24,10 @@
 
   outputs = inputs@{ self, nix-darwin, nixpkgs, nix-homebrew, homebrew-core, homebrew-cask, homebrew-bundle, ... }:
   let
+    nixpkgsConfig = {
+      config = { allowUnfree = true; };
+    };
+
     configuration = { pkgs, ... }: {
       # List packages installed in system profile. To search by name, run:
       # $ nix-env -qaP | grep wget
