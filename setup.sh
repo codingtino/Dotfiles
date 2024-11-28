@@ -13,7 +13,7 @@ set -euo pipefail
 #xcode-select --install
 
 ## install Nix
-sh <(curl -L https://nixos.org/nix/install) --yes
+curl -L https://nixos.org/nix/install | sh --yes
 
 ## get Dotfiles
 zsh nix run --extra-experimental-features nix-command --extra-experimental-features flakes nixpkgs#git clone https://github.com/codingtino/Dotfiles.git ~/.config
