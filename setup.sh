@@ -13,13 +13,16 @@ set -euo pipefail
 #xcode-select --install
 
 ## install Nix
-curl -L https://nixos.org/nix/install | sh --yes
+sh <(curl -L https://nixos.org/nix/install) --yes
 
 ## get Dotfiles
-zsh nix run --extra-experimental-features nix-command --extra-experimental-features flakes nixpkgs#git clone https://github.com/codingtino/Dotfiles.git ~/.config
+#/nix/var/nix/profiles/default/bin/nix run --extra-experimental-features nix-command --extra-experimental-features flakes nixpkgs#git clone https://github.com/codingtino/Dotfiles.git ~/.config
+/run/current-system/sw/bin/nix run --extra-experimental-features nix-command --extra-experimental-features flakes nixpkgs#git clone https://github.com/codingtino/Dotfiles.git ~/.config
 
 ## set hostname
 sed -i '' "s/simple/$(scutil --get LocalHostName)/" ~/.config/nix-darwin/flake.nix
 
 ## isntall nix-darwin
-zsh nix run nix-darwin -- switch --flake ~/.config/nix-darwin
+#/nix/var/nix/profiles/default/bin/nix run nix-darwin -- switch --flake ~/.config/nix-darwin
+/run/current-system/sw/bin/nix run nix-darwin -- switch --flake ~/.config/nix-darwin
+
