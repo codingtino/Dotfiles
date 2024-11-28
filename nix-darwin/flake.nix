@@ -53,7 +53,7 @@
         ];
 
         brews = [ 
-          "neofetch"
+#          "neofetch"
         ];
         
         casks = [
