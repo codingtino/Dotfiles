@@ -10,7 +10,7 @@ set -euo pipefail
 
 
 ## install xcode
-xcode-select --install
+#xcode-select --install
 
 ## install Nix
 sh <(curl -L https://nixos.org/nix/install) --yes

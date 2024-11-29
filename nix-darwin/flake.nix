@@ -26,21 +26,23 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, darwin, nix-homebrew, homebrew-core, homebrew-cask, homebrew-bundle, ... }:
+  outputs = inputs@{ self, nixpkgs, nix-darwin, nix-homebrew, homebrew-core, homebrew-cask, homebrew-bundle, homebrew-tap, ... }:
   let
     configuration = { pkgs, config, ... }: {
       environment.systemPackages = with pkgs;
         [
           cmatrix
           fastfetch
+          fzf
           git
           kitty
           mkalias
+          nvim
+          sketchybar
           (vscode-with-extensions.override {
             vscodeExtensions = with vscode-extensions; [
-              bbenoist.nix
-              ms-python.python
               ms-azuretools.vscode-docker
+              mechatroner.rainbow-csv
               ms-vscode-remote.remote-ssh
             ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
               {
@@ -92,15 +94,10 @@
         onActivation = {
           autoUpdate = true;
           upgrade = true;
-          cleanup = "zap";
+#          cleanup = "zap";
         };
   
-        taps = [
-#          "nikitabobko/tap/aerospace"  
-        ];
-
         brews = [ 
-          "neofetch"
           "mas"
         ];
         
