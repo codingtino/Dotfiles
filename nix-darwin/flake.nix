@@ -20,9 +20,13 @@
       url = "github:homebrew/homebrew-bundle";
       flake = false;
     };
+    homebrew-tap = {
+      url = "github:nikitabobko/homebrew-tap";
+      flake = false;
+    };
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, nix-homebrew, homebrew-core, homebrew-cask, homebrew-bundle, ... }:
+  outputs = inputs@{ self, nixpkgs, darwin, nix-homebrew, homebrew-core, homebrew-cask, homebrew-bundle, ... }:
   let
     configuration = { pkgs, config, ... }: {
       environment.systemPackages = with pkgs;
@@ -92,7 +96,7 @@
         };
   
         taps = [
-          "aerospace"
+#          "nikitabobko/tap/aerospace"  
         ];
 
         brews = [ 
@@ -101,7 +105,7 @@
         ];
         
         casks = [
-          "nikitabobko/tap"  
+          "aerospace"
         ];
 
         masApps = {
@@ -161,7 +165,7 @@
               "homebrew/homebrew-core" = homebrew-core;
               "homebrew/homebrew-cask" = homebrew-cask;
               "homebrew/homebrew-bundle" = homebrew-bundle;
-              "nikitabobko/tap" = homebrew-cask;
+              "nikitabobko/homebrew-tap" = homebrew-tap;
             };
 
             # Optional: Enable fully-declarative tap management
