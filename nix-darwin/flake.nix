@@ -24,7 +24,7 @@
 
   outputs = inputs@{ self, nix-darwin, nixpkgs, nix-homebrew, homebrew-core, homebrew-cask, homebrew-bundle, ... }:
   let
-    configuration = { pkgs, ... }: {
+    configuration = { pkgs, config, ... }: {
       environment.systemPackages = with pkgs;
         [
           cmatrix
@@ -44,7 +44,7 @@
                 publisher = "ms-vscode-remote";
                 version = "0.47.2";
                 sha256 = "1hp6gjh4xp2m1xlm1jsdzxw9d8frkiidhph6nvl24d0h8z34w49g";
-              }
+              };
             ];
           })
         ];
@@ -69,7 +69,7 @@
           done
         '';
 
-      fonts = with pkgs; [
+      fonts.packages = with pkgs; [
         nerd-fonts.jetbrains-mono
       ];
 
@@ -83,17 +83,29 @@
       };
 
       homebrew = {
+        # Install Homebrew under the default prefix
+        enable = true;
+
+        # Apple Silicon Only: Also install Homebrew under the default Intel prefix for Rosetta 2
+        enableRosetta = true;
+  
         taps = [
 
         ];
 
         brews = [ 
-#          "neofetch"
+          "neofetch"
+          "mas"
         ];
         
         casks = [
-            
+          "nikitabobko/tap/aerospace"  
         ];
+
+        masApps = {
+          Xcode = 497799835;
+        };
+
       };
 
 
