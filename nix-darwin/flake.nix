@@ -44,7 +44,7 @@
                 publisher = "ms-vscode-remote";
                 version = "0.47.2";
                 sha256 = "1hp6gjh4xp2m1xlm1jsdzxw9d8frkiidhph6nvl24d0h8z34w49g";
-              };
+              }
             ];
           })
         ];
@@ -85,12 +85,14 @@
       homebrew = {
         # Install Homebrew under the default prefix
         enable = true;
-
-        # Apple Silicon Only: Also install Homebrew under the default Intel prefix for Rosetta 2
-        enableRosetta = true;
+        onActivation = {
+          autoUpdate = true;
+          upgrade = true;
+          cleanup = "zap";
+        };
   
         taps = [
-
+          "aerospace"
         ];
 
         brews = [ 
@@ -99,11 +101,11 @@
         ];
         
         casks = [
-          "nikitabobko/tap/aerospace"  
+          "nikitabobko/tap"  
         ];
 
         masApps = {
-          Xcode = 497799835;
+
         };
 
       };
@@ -159,6 +161,7 @@
               "homebrew/homebrew-core" = homebrew-core;
               "homebrew/homebrew-cask" = homebrew-cask;
               "homebrew/homebrew-bundle" = homebrew-bundle;
+              "nikitabobko/tap" = homebrew-cask;
             };
 
             # Optional: Enable fully-declarative tap management
