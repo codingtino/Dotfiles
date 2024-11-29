@@ -24,14 +24,7 @@
 
   outputs = inputs@{ self, nix-darwin, nixpkgs, nix-homebrew, homebrew-core, homebrew-cask, homebrew-bundle, ... }:
   let
-    nixpkgsConfig = {
-      config = { allowUnfree = true; };
-    };
-
-    configuration = { pkgs, config, ... }: {
-      nixpkgs.config.allowUnfree = true;
-      # List packages installed in system profile. To search by name, run:
-      # $ nix-env -qaP | grep wget
+    configuration = { pkgs, ... }: {
       environment.systemPackages = with pkgs;
         [
           cmatrix
@@ -56,6 +49,30 @@
           })
         ];
 
+      system.activationScripts.applications.text = let
+        env = pkgs.buildEnv {
+          name = "system-applications";
+          paths = config.environment.systemPackages;
+          pathsToLink = "/Applications";
+        };
+      in
+        pkgs.lib.mkForce ''
+          # Set up applications.
+          echo "setting up /Applications..." >&2
+          rm -rf /Applications/Nix\ Apps
+          mkdir -p /Applications/Nix\ Apps
+          find ${env}/Applications -maxdepth 1 -type l -exec readlink '{}' + |
+          while read -r src; do
+            app_name=$(basename "$src")
+            echo "copying $src" >&2
+            ${pkgs.mkalias}/bin/mkalias "$src" "/Applications/Nix Apps/$app_name"
+          done
+        '';
+
+      fonts = with pkgs; [
+        nerd-fonts.jetbrains-mono
+      ];
+
       system.defaults = {
         dock.autohide = true;
         dock.mru-spaces = false;
@@ -71,46 +88,14 @@
         ];
 
         brews = [ 
-
+#          "neofetch"
         ];
         
         casks = [
-          "nikitabobko/tap/aerospace"
+            
         ];
-
-        masApps = {
-          Xcode = 497799835;
-        }
-
-        onActivation.cleanup = "zap";
-        onActivation.autoUpdate = true;
-        onActivation.upgrade = "true;
-        
       };
 
-      fonts.packages = [
-        (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
-      ];
-
-      system.activationScripts.applications.text = let
-        env = pkgs.buildEnv {
-          name = "system-applications";
-          paths = config.environment.systemPackages;
-          pathsToLink = "/Applications";
-        };
-      in
-        pkgs.lib.mkForce ''
-        # Set up applications.
-        echo "setting up /Applications..." >&2
-        rm -rf /Applications/Nix\ Apps
-        mkdir -p /Applications/Nix\ Apps
-        find ${env}/Applications -maxdepth 1 -type l -exec readlink '{}' + |
-        while read -r src; do
-          app_name=$(basename "$src")
-          echo "copying $src" >&2
-          ${pkgs.mkalias}/bin/mkalias "$src" "/Applications/Nix Apps/$app_name"
-        done
-      '';
 
       # allowUnfree is required to install some packages that are not "free" software.
       nixpkgs.config.allowUnfree = true;
