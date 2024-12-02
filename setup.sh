@@ -10,15 +10,15 @@ set -euo pipefail
 
 
 ## install xcode
-if ! [[ "xcode-select -p" ]]; then
-    touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
-    PROD=$(
-        grep "Label:" |
-        awk -F ': ' 'END{print $2}'
-    )
-    softwareupdate -i "$PROD" --verbose
-    rm /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
-fi
+#if ! [[ "xcode-select -p" ]]; then
+#    touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+#    PROD=$(
+#        grep "Label:" |
+#        awk -F ': ' 'END{print $2}'
+#    )
+#    softwareupdate -i "$PROD" --verbose
+#    rm /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+#fi
 
 ## install Nix
 sh <(curl -L https://nixos.org/nix/install) --yes
