@@ -51,21 +51,21 @@
           })
         ];
 
-#      launchd = {
-#        user = {
-#          agents = {
-#            ollama-serve = {
-#              command = "${pkgs.ollama}/bin/katana -c ~/.config/katana/caps2esc.kbd";
-#              serviceConfig = {
-#                KeepAlive = true;
-#                RunAtLoad = true;
-#                StandardOutPath = "/Library/Logs/Kanata/kanata.out.log";
-#                StandardErrorPath = "/Library/Logs/Kanata/kanata.err.log";
-#              };
-#            };
-#          };
-#        };
-#      };
+      launchd = {
+        user = {
+          agents = {
+            ollama-serve = {
+              command = "${pkgs.katana}/bin/katana -c ~/.config/katana/caps2esc.kbd";
+              serviceConfig = {
+                KeepAlive = true;
+                RunAtLoad = true;
+                StandardOutPath = "/Library/Logs/Kanata/kanata.out.log";
+                StandardErrorPath = "/Library/Logs/Kanata/kanata.err.log";
+              };
+            };
+          };
+        };
+      };
 
 
       system.activationScripts.applications.text = let
