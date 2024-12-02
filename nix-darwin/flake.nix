@@ -51,6 +51,23 @@
           })
         ];
 
+#      launchd = {
+#        user = {
+#          agents = {
+#            ollama-serve = {
+#              command = "${pkgs.ollama}/bin/katana -c ~/.config/katana/caps2esc.kbd";
+#              serviceConfig = {
+#                KeepAlive = true;
+#                RunAtLoad = true;
+#                StandardOutPath = "/Library/Logs/Kanata/kanata.out.log";
+#                StandardErrorPath = "/Library/Logs/Kanata/kanata.err.log";
+#              };
+#            };
+#          };
+#        };
+#      };
+
+
       system.activationScripts.applications.text = let
         env = pkgs.buildEnv {
           name = "system-applications";
