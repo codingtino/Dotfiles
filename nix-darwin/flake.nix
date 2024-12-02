@@ -22,7 +22,7 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, nix-darwin, nix-homebrew, homebrew-core, homebrew-cask, homebrew-bundle ... }:
+  outputs = inputs@{ self, nixpkgs, nix-darwin, nix-homebrew, homebrew-core, homebrew-cask, homebrew-bundle, ... }:
   let
     configuration = { pkgs, config, ... }: {
       environment.systemPackages = with pkgs;
@@ -31,11 +31,10 @@
           fastfetch
           fzf
           git
-#          jankyborders
+          katana
           kitty
           mkalias
           neovim
-#          sketchybar
           (vscode-with-extensions.override {
             vscodeExtensions = with vscode-extensions; [
               ms-azuretools.vscode-docker
@@ -159,7 +158,6 @@
               "homebrew/homebrew-core" = homebrew-core;
               "homebrew/homebrew-cask" = homebrew-cask;
               "homebrew/homebrew-bundle" = homebrew-bundle;
-              "nikitabobko/homebrew-tap" = homebrew-tap;
             };
 
             # Optional: Enable fully-declarative tap management
