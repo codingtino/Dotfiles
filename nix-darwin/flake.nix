@@ -20,13 +20,9 @@
       url = "github:homebrew/homebrew-bundle";
       flake = false;
     };
-    homebrew-tap = {
-      url = "github:nikitabobko/homebrew-tap";
-      flake = false;
-    };
   };
 
-  outputs = inputs@{ self, nixpkgs, nix-darwin, nix-homebrew, homebrew-core, homebrew-cask, homebrew-bundle, homebrew-tap, ... }:
+  outputs = inputs@{ self, nixpkgs, nix-darwin, nix-homebrew, homebrew-core, homebrew-cask, homebrew-bundle ... }:
   let
     configuration = { pkgs, config, ... }: {
       environment.systemPackages = with pkgs;
@@ -35,10 +31,11 @@
           fastfetch
           fzf
           git
+#          jankyborders
           kitty
           mkalias
-          nvim
-          sketchybar
+          neovim
+#          sketchybar
           (vscode-with-extensions.override {
             vscodeExtensions = with vscode-extensions; [
               ms-azuretools.vscode-docker
@@ -102,7 +99,7 @@
         ];
         
         casks = [
-          "aerospace"
+
         ];
 
         masApps = {
