@@ -54,7 +54,7 @@
       launchd = {
         user = {
           agents = {
-            ollama-serve = {
+            katana = {
               command = "${pkgs.katana}/bin/katana -c ~/.config/katana/caps2esc.kbd";
               serviceConfig = {
                 KeepAlive = true;
@@ -111,7 +111,7 @@
         };
   
         brews = [ 
-          "mas"
+#          "mas"
         ];
         
         casks = [
