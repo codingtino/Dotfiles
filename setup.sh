@@ -11,6 +11,15 @@ set -euo pipefail
 
 ## install xcode
 #xcode-select --install
+touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+PROD=$(softwareupdate -l |
+    grep "\*.*Command Line" |
+    head -n 1 |
+    awk -F"*" '{print $2}' |
+    sed -e 's/^ *//')
+softwareupdate -i "$PROD" --verbose
+rm /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+
 
 ## install Nix
 sh <(curl -L https://nixos.org/nix/install) --yes
