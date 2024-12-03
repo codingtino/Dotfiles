@@ -19,8 +19,8 @@ set -euo pipefail
 #    softwareupdate -i "$PROD" --verbose
 #    rm /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
 #fi
-xcode-select --install
 while ! xcode-select -p &>/dev/null; do
+    xcode-select --install
     echo "Waiting for Xcode installation to complete..."
     sleep 10
 done
