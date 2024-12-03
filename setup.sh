@@ -20,25 +20,10 @@ set -euo pipefail
 #    rm /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
 #fi
 xcode-select --install
-sleep 1
-osascript <<EOD
-  tell application "System Events"
-    tell process "Install Command Line Developer Tools"
-      keystroke return
-      click button "Agree" of window "License Agreement"
-      delay 1
-      keystroke return
-      repeat
-        delay 5
-        if exists (button "Done" of window 1) then
-          click button "Done" of window 1
-          exit repeat
-        end if
-      end repeat
-    end tell
-  end tell
-EOD
-
+while ! [[ $(xcode-select --version &>/dev/null) ]]; do
+    echo "Waiting for Xcode installation to complete..."
+    sleep 10
+done
 
 ## install Nix
 sh <(curl -L https://nixos.org/nix/install) --yes
