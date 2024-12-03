@@ -95,7 +95,7 @@
         "int" : 0
       },
       "hideMenubarIcon" : {
-        "bool" : true
+        "bool" : false
       },
       "ignoreDragSnapToo" : {
         "int" : 0

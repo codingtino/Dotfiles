@@ -35,7 +35,8 @@ sh <(curl -L https://nixos.org/nix/install) --yes
 sed -i '' "s/simple/$(scutil --get LocalHostName)/" ~/.config/nix-darwin/flake.nix
 
 ## copy Rectangle-Config to default Path
-mv ~/.config/Rectangle/ ~/Library/Application Support/
+mv ~/.config/Rectangle/ ~/Library/Application\ Support/
+mv ~/.config/com.raycast.macos/ ~/Library/Application\ Support/
 
 ## isntall nix-darwin
 /nix/var/nix/profiles/default/bin/nix run nix-darwin -- switch --flake ~/.config/nix-darwin
