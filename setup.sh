@@ -20,7 +20,7 @@ set -euo pipefail
 #    rm /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
 #fi
 while ! xcode-select -p &>/dev/null; do
-    xcode-select --install
+    xcode-select --install &>/dev/null
     echo "Waiting for Xcode installation to complete..."
     sleep 10
 done
