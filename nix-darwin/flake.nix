@@ -31,42 +31,42 @@
           fastfetch
           fzf
           git
-          katana
           kitty
           mkalias
           neovim
           rectangle
-          (vscode-with-extensions.override {
-            vscodeExtensions = with vscode-extensions; [
-              ms-azuretools.vscode-docker
-              mechatroner.rainbow-csv
-              ms-vscode-remote.remote-ssh
-            ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-              {
-                name = "remote-ssh-edit";
-                publisher = "ms-vscode-remote";
-                version = "0.47.2";
-                sha256 = "1hp6gjh4xp2m1xlm1jsdzxw9d8frkiidhph6nvl24d0h8z34w49g";
-              }
-            ];
-          })
+          vscode
+#          (vscode-with-extensions.override {
+#            vscodeExtensions = with vscode-extensions; [
+#              ms-azuretools.vscode-docker
+#              mechatroner.rainbow-csv
+#              ms-vscode-remote.remote-ssh
+#            ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+#              {
+#                name = "remote-ssh-edit";
+#                publisher = "ms-vscode-remote";
+#                version = "0.47.2";
+#                sha256 = "1hp6gjh4xp2m1xlm1jsdzxw9d8frkiidhph6nvl24d0h8z34w49g";
+#              }
+#            ];
+#          })
         ];
 
-      launchd = {
-        user = {
-          agents = {
-            katana = {
-              command = "${pkgs.katana}/bin/katana -c ~/.config/katana/caps2esc.kbd";
-              serviceConfig = {
-                KeepAlive = true;
-                RunAtLoad = true;
-                StandardOutPath = "/Library/Logs/Kanata/kanata.out.log";
-                StandardErrorPath = "/Library/Logs/Kanata/kanata.err.log";
-              };
-            };
-          };
-        };
-      };
+#      launchd = {
+#        user = {
+#          agents = {
+#            katana = {
+#              command = "${pkgs.katana}/bin/katana -c ~/.config/katana/caps2esc.kbd";
+#              serviceConfig = {
+#                KeepAlive = true;
+#                RunAtLoad = true;
+#                StandardOutPath = "/Library/Logs/Kanata/kanata.out.log";
+#                StandardErrorPath = "/Library/Logs/Kanata/kanata.err.log";
+#              };
+#            };
+#          };
+#        };
+#      };
 
 
       system.activationScripts.applications.text = let
@@ -98,7 +98,7 @@
         dock.mru-spaces = false;
         finder.AppleShowAllExtensions = true;
         finder.FXPreferredViewStyle = "Nlsv";
-        loginwindow.LoginwindowText = "TEST";
+      #  loginwindow.LoginwindowText = "TEST";
         screencapture.location = "~/Pictures/screenshots";
       };
 
