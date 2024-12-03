@@ -35,6 +35,7 @@
           kitty
           mkalias
           neovim
+          rectangle
           (vscode-with-extensions.override {
             vscodeExtensions = with vscode-extensions; [
               ms-azuretools.vscode-docker
@@ -112,10 +113,11 @@
   
         brews = [ 
 #          "mas"
+#          "kanata"
         ];
         
         casks = [
-
+          "karabiner-elements"
         ];
 
         masApps = {
@@ -127,6 +129,7 @@
 
       # allowUnfree is required to install some packages that are not "free" software.
       nixpkgs.config.allowUnfree = true;
+#      nixpkgs.config.allowBroken = true;
 
       # Auto upgrade nix package and the daemon service.
       services.nix-daemon.enable = true;
