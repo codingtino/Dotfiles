@@ -118,6 +118,7 @@
         
         casks = [
           "karabiner-elements"
+          "homerow"
         ];
 
         masApps = {
