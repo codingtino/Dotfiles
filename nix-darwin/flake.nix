@@ -34,7 +34,8 @@
           kitty
           mkalias
           neovim
-          rectangle
+#          rectangle
+          tmux
           vscode
 #          (vscode-with-extensions.override {
 #            vscodeExtensions = with vscode-extensions; [
@@ -100,6 +101,8 @@
         finder.FXPreferredViewStyle = "Nlsv";
       #  loginwindow.LoginwindowText = "TEST";
         screencapture.location = "~/Pictures/screenshots";
+# disable spotlight keyboard shortcut
+# set window cycle to hyper+c
       };
 
       homebrew = {
@@ -119,6 +122,7 @@
         casks = [
           "karabiner-elements"
           "homerow"
+          "raycast"
         ];
 
         masApps = {
