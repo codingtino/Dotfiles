@@ -9,16 +9,9 @@
 set -euo pipefail
 
 
+## is user an admin?
+
 ## install xcode
-#if ! [[ "xcode-select -p" ]]; then
-#    touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
-#    PROD=$(
-#        grep "Label:" |
-#        awk -F ': ' 'END{print $2}'
-#    )
-#    softwareupdate -i "$PROD" --verbose
-#    rm /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
-#fi
 while ! xcode-select -p &>/dev/null; do
     xcode-select --install &>/dev/null
     echo "Waiting for Xcode installation to complete..."
@@ -36,7 +29,9 @@ sed -i '' "s/simple/$(scutil --get LocalHostName)/" ~/.config/nix-darwin/flake.n
 
 ## copy Rectangle-Config to default Path
 #mv ~/.config/Rectangle/ ~/Library/Application\ Support/
-mv ~/.config/com.raycast.macos/ ~/Library/Application\ Support/
+#mv ~/.config/com.raycast.macos/ ~/Library/Application\ Support/
+mv ~/.config/Services/* ~/Library/Services/
+mv ~/.config/com.apple.symbolichotkeys.plist ~/Library/Preferences/
 
 ## isntall nix-darwin
 /nix/var/nix/profiles/default/bin/nix run nix-darwin -- switch --flake ~/.config/nix-darwin
@@ -83,12 +78,12 @@ while :; do
     fi
 done
 
-open -a Raycast
-echo "opened Raycast"
-echo "Press 'y' to continue..."
-while :; do
-    read -n 1 -s key  # Read one character silently (no echo)
-    if [[ $key == "y" ]]; then
-        break
-    fi
-done
+#open -a Raycast
+#echo "opened Raycast"
+#echo "Press 'y' to continue..."
+#while :; do
+#    read -n 1 -s key  # Read one character silently (no echo)
+#    if [[ $key == "y" ]]; then
+#        break
+#    fi
+#done

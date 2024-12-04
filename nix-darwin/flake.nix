@@ -122,7 +122,7 @@
         casks = [
           "karabiner-elements"
           "homerow"
-          "raycast"
+#          "raycast"
         ];
 
         masApps = {
