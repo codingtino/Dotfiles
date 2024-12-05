@@ -1,3 +1,10 @@
+hs.eventtap.new({hs.eventtap.event.types.keyDown}, function(event)
+    local keyCode = event:getKeyCode()
+    local flags = event:getFlags()
+    print("Key pressed: " .. keyCode, hs.inspect(flags))
+end):start()
+
+
 -- Define the Hyper Key (Caps Lock remapped to F18)
 local hyper = {"cmd", "alt", "ctrl", "shift"}
 
