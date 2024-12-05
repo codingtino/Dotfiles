@@ -121,7 +121,7 @@
         
         casks = [
 #          "karabiner-elements"
-          "hammerspoon"
+#          "hammerspoon"
           "homerow"
 #          "raycast"
         ];
