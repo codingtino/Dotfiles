@@ -111,7 +111,7 @@
         onActivation = {
           autoUpdate = true;
           upgrade = true;
-#          cleanup = "zap";
+          cleanup = "zap";
         };
   
         brews = [ 
@@ -120,7 +120,8 @@
         ];
         
         casks = [
-          "karabiner-elements"
+#          "karabiner-elements"
+          "hammerspoon"
           "homerow"
 #          "raycast"
         ];
