@@ -34,7 +34,6 @@
           kitty
           mkalias
           neovim
-#          rectangle
           tmux
           vscode
 #          (vscode-with-extensions.override {
@@ -121,8 +120,11 @@
         
         casks = [
 #          "karabiner-elements"
-#          "hammerspoon"
-          "homerow"
+          "hammerspoon"
+          "hyperkey"
+          "rectangle"
+          "shortcat"
+#          "homerow"
 #          "raycast"
         ];
 

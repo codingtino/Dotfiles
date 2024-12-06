@@ -30,16 +30,16 @@ sed -i '' "s/simple/$(scutil --get LocalHostName)/" ~/.config/nix-darwin/flake.n
 ## copy Rectangle-Config to default Path
 #mv ~/.config/Rectangle/ ~/Library/Application\ Support/
 #mv ~/.config/com.raycast.macos/ ~/Library/Application\ Support/
-mv ~/.config/Services/* ~/Library/Services/
-mv ~/.config/com.apple.symbolichotkeys.plist ~/Library/Preferences/
+#mv ~/.config/Services/* ~/Library/Services/
+mv ~/.config/Preferences/* ~/Library/Preferences/
 
-## isntall nix-darwin
+## install nix-darwin
 /nix/var/nix/profiles/default/bin/nix run nix-darwin -- switch --flake ~/.config/nix-darwin
 
 ## open every app to grant permissions
 
-open -a Homerow
-echo "opened Homerow"
+open -a Shortcat
+echo "opened Shortcat"
 echo "Press 'y' to continue..."
 while :; do
     read -n 1 -s key  # Read one character silently (no echo)
@@ -48,8 +48,38 @@ while :; do
     fi
 done
 
-#open -a Rectangle
-#echo "opened Rectangle"
+open -a Rectangle
+echo "opened Rectangle"
+echo "Press 'y' to continue..."
+while :; do
+    read -n 1 -s key  # Read one character silently (no echo)
+    if [[ $key == "y" ]]; then
+        break
+    fi
+done
+
+open -a Hyperkey
+echo "opened Hyperkey"
+echo "Press 'y' to continue..."
+while :; do
+    read -n 1 -s key  # Read one character silently (no echo)
+    if [[ $key == "y" ]]; then
+        break
+    fi
+done
+
+open -a Hammerspoon
+echo "opened Hammerspoon"
+echo "Press 'y' to continue..."
+while :; do
+    read -n 1 -s key  # Read one character silently (no echo)
+    if [[ $key == "y" ]]; then
+        break
+    fi
+done
+
+#open -a Karabiner-Elements
+#echo "opened Karabiner-Elements"
 #echo "Press 'y' to continue..."
 #while :; do
 #    read -n 1 -s key  # Read one character silently (no echo)
@@ -58,25 +88,15 @@ done
 #    fi
 #done
 
-open -a Karabiner-Elements
-echo "opened Karabiner-Elements"
-echo "Press 'y' to continue..."
-while :; do
-    read -n 1 -s key  # Read one character silently (no echo)
-    if [[ $key == "y" ]]; then
-        break
-    fi
-done
-
-open -a Karabiner-EventViewer
-echo "opened Karabiner-EventViewer"
-echo "Press 'y' to continue..."
-while :; do
-    read -n 1 -s key  # Read one character silently (no echo)
-    if [[ $key == "y" ]]; then
-        break
-    fi
-done
+#open -a Karabiner-EventViewer
+#echo "opened Karabiner-EventViewer"
+#echo "Press 'y' to continue..."
+#while :; do
+#    read -n 1 -s key  # Read one character silently (no echo)
+#    if [[ $key == "y" ]]; then
+#        break
+#    fi
+#done
 
 #open -a Raycast
 #echo "opened Raycast"
@@ -87,3 +107,4 @@ done
 #        break
 #    fi
 #done
+

@@ -1,26 +1,20 @@
-hs.eventtap.new({hs.eventtap.event.types.keyDown}, function(event)
-    local keyCode = event:getKeyCode()
-    local flags = event:getFlags()
-    print("Key pressed: " .. keyCode, hs.inspect(flags))
-end):start()
+-- Define the Hyper key combination
+local hyper = {"ctrl", "alt", "cmd", "shift"}
 
+-- Open Safari with Hyper + S
+hs.hotkey.bind(hyper, "S", function()
+    hs.application.launchOrFocus("Safari")
+end)
 
--- Define the Hyper Key (Caps Lock remapped to F18)
-local hyper = {"cmd", "alt", "ctrl", "shift"}
+-- Open Finder with Hyper + F
+hs.hotkey.bind(hyper, "F", function()
+    hs.application.launchOrFocus("Finder")
+end)
 
--- Trigger the Hyper Key when F18 is pressed
-local f18 = hs.hotkey.modal.new({}, "F18")
-
--- Enter Hyper Key mode when Caps Lock (F18) is pressed
-f18:entered(function() end)
-f18:exited(function() end)
-
--- Bind Hyper Key + Shortcuts
+-- Open Kitty terminal with Hyper + T
 hs.hotkey.bind(hyper, "T", function()
-    hs.application.launchOrFocus("Terminal") -- Open Terminal
+    hs.application.launchOrFocus("Kitty")
 end)
 
--- You can add more Hyper Key bindings here
-hs.hotkey.bind(hyper, "K", function()
-    hs.alert.show("Hyper + K pressed!") -- Example binding
-end)
+-- Notify when the config is loaded
+-- hs.alert.show("Hammerspoon Config Loaded")
