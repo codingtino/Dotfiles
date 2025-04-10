@@ -31,7 +31,13 @@ sed -i '' "s/simple/$(scutil --get LocalHostName)/" ~/.config/nix-darwin/flake.n
 #mv ~/.config/Rectangle/ ~/Library/Application\ Support/
 #mv ~/.config/com.raycast.macos/ ~/Library/Application\ Support/
 #mv ~/.config/Services/* ~/Library/Services/
-mv ~/.config/Preferences/* ~/Library/Preferences/
+mv ~/.config/Preferences/com.knollsoft.* ~/Library/Preferences/
+mv ~/.config/.hammerspoon/* ~/.hammerspoon
+
+# todo
+## setup the keyboard-shortcut for cycling through windows to hyper+c
+## shortcat preferences restor dosen't work
+
 
 ## install nix-darwin
 /nix/var/nix/profiles/default/bin/nix run nix-darwin -- switch --flake ~/.config/nix-darwin
