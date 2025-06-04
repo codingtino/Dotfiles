@@ -27,15 +27,15 @@
     configuration = { pkgs, config, ... }: {
       environment.systemPackages = with pkgs;
         [
-          cmatrix
-          fastfetch
-          fzf
-          git
-          kitty
-          mkalias
-          neovim
-          tmux
-          vscode
+#          cmatrix
+#          fastfetch
+#          fzf
+#          git
+#          kitty
+#          mkalias
+#          neovim
+#          tmux
+#          vscode
 #          (vscode-with-extensions.override {
 #            vscodeExtensions = with vscode-extensions; [
 #              ms-azuretools.vscode-docker
@@ -114,12 +114,13 @@
         };
   
         brews = [ 
-#          "mas"
+          "mas"
 #          "kanata"
         ];
         
         casks = [
 #          "karabiner-elements"
+          "vscode"
           "hammerspoon"
           "hyperkey"
           "rectangle"
@@ -129,7 +130,7 @@
         ];
 
         masApps = {
-
+          1352778147 #Bitwarden
         };
 
       };
