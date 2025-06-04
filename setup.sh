@@ -28,9 +28,9 @@ sh <(curl -L https://nixos.org/nix/install) --yes
 sed -i '' "s/simple/$(scutil --get LocalHostName)/" ~/.config/nix-darwin/flake.nix
 
 ## allow nix-experimental
-cat << EOF | sudo tee -a /etc/nix/nix.conf
-experimental-features = nix-command flakes
-EOF
+#cat << EOF | sudo tee -a /etc/nix/nix.conf
+#experimental-features = nix-command flakes
+#EOF
 
 ## copy Rectangle-Config to default Path
 #mv ~/.config/Rectangle/ ~/Library/Application\ Support/
@@ -45,7 +45,8 @@ mv ~/.config/.hammerspoon/* ~/.hammerspoon
 
 
 ## install nix-darwin
-/nix/var/nix/profiles/default/bin/nix run nix-darwin -- switch --flake ~/.config/nix-darwin
+#/nix/var/nix/profiles/default/bin/nix run nix-darwin -- switch --flake ~/.config/nix-darwin
+sudo --preserve-env=HOME /nix/var/nix/profiles/default/bin/nix run nix-darwin --extra-experimental-features 'nix-command flakes' -- switch --flake ~/.config/nix-darwin
 
 ## open every app to grant permissions
 
