@@ -27,6 +27,11 @@ sh <(curl -L https://nixos.org/nix/install) --yes
 ## set hostname
 sed -i '' "s/simple/$(scutil --get LocalHostName)/" ~/.config/nix-darwin/flake.nix
 
+## allow nix-experimental
+cat << EOF | sudo tee -a /etc/nix/nix.conf
+experimental-features = nix-command flakes
+EOF
+
 ## copy Rectangle-Config to default Path
 #mv ~/.config/Rectangle/ ~/Library/Application\ Support/
 #mv ~/.config/com.raycast.macos/ ~/Library/Application\ Support/
