@@ -121,6 +121,7 @@
         casks = [
 #          "karabiner-elements"
           "vscode"
+          "ghostty"
           "hammerspoon"
           "hyperkey"
           "rectangle"
