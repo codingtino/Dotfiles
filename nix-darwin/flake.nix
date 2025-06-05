@@ -25,31 +25,47 @@
   outputs = inputs@{ self, nixpkgs, nix-darwin, nix-homebrew, homebrew-core, homebrew-cask, homebrew-bundle, ... }:
   let
     configuration = { pkgs, config, ... }: {
+      system.primaryUser = "t.naumann";
+
+      system.activationScripts.extraActivation.text = ''
+        echo "Checking for Rosetta..."
+        if ! /usr/bin/pgrep oahd >/dev/null 2>&1; then
+          echo "Rosetta not installed, installing..."
+          /usr/sbin/softwareupdate --install-rosetta --agree-to-license || true
+        else
+          echo "Rosetta is already installed."
+        fi
+      '';
+
+      environment.etc."profile.d/vscode-path.sh".text = ''
+        export PATH="/run/current-system/sw/Applications/Visual Studio Code.app/Contents/Resources/app/bin:$PATH"
+      '';
+
+
       environment.systemPackages = with pkgs;
         [
-#          cmatrix
-#          fastfetch
-#          fzf
-#          git
-#          kitty
-#          mkalias
-#          neovim
-#          tmux
-#          vscode
-#          (vscode-with-extensions.override {
-#            vscodeExtensions = with vscode-extensions; [
-#              ms-azuretools.vscode-docker
-#              mechatroner.rainbow-csv
-#              ms-vscode-remote.remote-ssh
-#            ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-#              {
-#                name = "remote-ssh-edit";
-#                publisher = "ms-vscode-remote";
-#                version = "0.47.2";
-#                sha256 = "1hp6gjh4xp2m1xlm1jsdzxw9d8frkiidhph6nvl24d0h8z34w49g";
-#              }
-#            ];
-#          })
+          cmatrix
+          fastfetch
+          fzf
+          git
+          mkalias
+          neovim
+          tmux
+
+          (vscode-with-extensions.override {
+            vscodeExtensions = with vscode-extensions; [
+              ms-azuretools.vscode-docker
+              mechatroner.rainbow-csv
+              ms-vscode-remote.remote-ssh
+            ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+              {
+                name = "remote-ssh-edit";
+                publisher = "ms-vscode-remote";
+                version = "0.47.2";
+                sha256 = "1hp6gjh4xp2m1xlm1jsdzxw9d8frkiidhph6nvl24d0h8z34w49g";
+              }
+            ];
+          })
         ];
 
 #      launchd = {
@@ -115,23 +131,19 @@
   
         brews = [ 
           "mas"
-#          "kanata"
         ];
         
         casks = [
-#          "karabiner-elements"
-          "vscode"
           "ghostty"
           "hammerspoon"
           "hyperkey"
           "rectangle"
           "shortcat"
-#          "homerow"
-#          "raycast"
+          "chatgpt"
         ];
 
         masApps = {
-          1352778147 #Bitwarden
+#          "1352778147" #Bitwarden
         };
 
       };
@@ -141,8 +153,6 @@
       nixpkgs.config.allowUnfree = true;
 #      nixpkgs.config.allowBroken = true;
 
-      # Auto upgrade nix package and the daemon service.
-      services.nix-daemon.enable = true;
       # nix.package = pkgs.nix;
 
       # Necessary for using flakes on this system.
@@ -162,13 +172,13 @@
       # The platform the configuration will be used on.
       nixpkgs.hostPlatform = "aarch64-darwin";
 
-      security.pam.enableSudoTouchIdAuth = true;
+      security.pam.services.sudo_local.touchIdAuth = true;
     };
   in
   {
     # Build darwin flake using:
-    # $ darwin-rebuild build --flake .#simple
-    darwinConfigurations."simple" = nix-darwin.lib.darwinSystem {
+    # $ darwin-rebuild build --flake .#GGEG-MBA-C02FG1C3Q6L5
+    darwinConfigurations."GGEG-MBA-C02FG1C3Q6L5" = nix-darwin.lib.darwinSystem {
       modules = [
         configuration
         nix-homebrew.darwinModules.nix-homebrew
@@ -200,6 +210,6 @@
     };
 
     # Expose the package set, including overlays, for convenience.
-    darwinPackages = self.darwinConfigurations."simple".pkgs;
+    darwinPackages = self.darwinConfigurations."GGEG-MBA-C02FG1C3Q6L5".pkgs;
   };
 }
