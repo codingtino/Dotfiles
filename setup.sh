@@ -46,7 +46,9 @@ mv ~/.config/.hammerspoon/* ~/.hammerspoon
 
 ## install nix-darwin
 #/nix/var/nix/profiles/default/bin/nix run nix-darwin -- switch --flake ~/.config/nix-darwin
-sudo --preserve-env=HOME /nix/var/nix/profiles/default/bin/nix run nix-darwin --extra-experimental-features 'nix-command flakes' -- switch --flake ~/.config/nix-darwin
+#sudo --preserve-env=HOME /nix/var/nix/profiles/default/bin/nix run nix-darwin --extra-experimental-features 'nix-command flakes' -- switch --flake ~/.config/nix-darwin
+/nix/var/nix/profiles/default/bin/nix build ~/.config/nix-darwin#darwinConfigurations.$(hostname -s).system
+sudo /run/current-system/sw/bin/darwin-rebuild switch --flake ~/.config/nix-darwin
 
 ## open every app to grant permissions
 
